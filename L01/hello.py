@@ -1,6 +1,6 @@
 #print ("==================")
 #print("Welcome here")
-#print("My firts post!")
+#print("My first post!")
 #print ("==================")
 
 
@@ -29,6 +29,6 @@ if age >40 and category == "Fun":
 # followers -= 10 
 # print("Day 3: ",followers)*\
 
-print("Username:", username)
+# print("Username:", username)
 #print("Bio:", bio) 
 #print("Followers:", followers)
