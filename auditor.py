@@ -18,16 +18,14 @@ while True:
         failed += 1
         continue
 
-    inventory += int(user_input)
-
     if inventory >= 500:
                 print("Inventory limit exceeded.")
                 failed += 1
                 break
+
+    inventory += int(user_input)
     
     
-
-
 
 print("Total Units Processed: ", inventory)
 print("Number of Failed/Rejected Entries: ",failed)
