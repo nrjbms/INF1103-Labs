@@ -28,7 +28,7 @@ def process_delivery(current_total, new_value):
 
 def calculate_tax(total_units):
     tax_rate = 0.1 
-    return total_units * tax_rate    
+    return total_units * tax_rate
 
 def generate_report(inventory, deliveries_processed, failed_attempts, tax):
     print("Total Inventory: ", inventory)
