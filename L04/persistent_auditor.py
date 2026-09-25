@@ -1,4 +1,4 @@
-inventory = "L04/order.txt"
+inventory = "order.txt"
 
     
 
