@@ -1,0 +1,4 @@
+1001,Mouse,1
+1002,Keyboard,2
+1003,Laptop,3
+1004,Macbook,100

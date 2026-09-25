@@ -1,21 +1,23 @@
-inventory = "order.txt"
+inventory = "L04/order.txt"
 
     
 
-def load_inventory(order_id):
+def load_inventory():
     orders = []
-    open(inventory, 'a').close()  # Ensure the file exists
+    
+    open(inventory, 'a').close()
     file = open(inventory, 'r')
     for line in file:
-        product, quantity = line.strip().split(',')
-        orders.append([order_id, product, quantity])
+        order_id, product, quantity = line.strip().split(',')
+        orders.append([order_id.strip(), product.strip(), quantity.strip()])
     file.close()
     return orders
+
 
 def save_inventory(orders):
     file = open(inventory, 'w')
     for order in orders:
-        file.write(order[0] + " ," + order[1] + " ," + order[2] + "\n")
+        file.write(order[0] + "," + order[1] + "," + order[2] + "\n")
     file.close()
 
 
@@ -43,7 +45,7 @@ def generate_report(orders):
         print(order[0] + ", " + order[1] + ", " + order[2])
     print()
 
-orders = load_inventory("1001")
+orders = load_inventory()
 generate_report(orders)
 
 while True:
@@ -69,6 +71,6 @@ while True:
     print()
 
 save_inventory(orders)
-print("Order successfully saved to " + inventory)
+print("Order successfully saved to order.txt")
 
     
