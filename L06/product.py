@@ -29,7 +29,7 @@ class Product:
     def display_information(self):
         print(f"ID: {self.__product_id} | Name: {self.__name} | Price: ${self.__price:.2f} | Stock: {self.__stock}")
 
-    def to_dict(self):
+    def product_dict(self):
         return {
             "product_id": self.__product_id,
             "name": self.__name,
