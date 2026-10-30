@@ -1,8 +1,10 @@
 [
     {
         "product_id": "P001",
-        "name": "Keyboard",
-        "price": 85.0,
-        "stock": 80
+        "name": "Mouse",
+        "price": 15.0,
+        "stock": 5,
+        "type": "physical",
+        "weight": 0.5
     }
 ]

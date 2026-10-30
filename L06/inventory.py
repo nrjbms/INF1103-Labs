@@ -6,7 +6,7 @@ class Inventory:
     def __init__(self):
         self.__products = []
 
-    def __generate_id(self):
+    def generate_id(self):
         highest = 0
         for product in self.__products:
             number = product.get_product_id()[1:]

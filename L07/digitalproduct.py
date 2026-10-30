@@ -4,7 +4,7 @@ from product import Product
 class DigitalProduct(Product):
     
     def __init__(self, product_id, name, price, stock, download_size):
-            super().__init__(self, product_id, name, price, stock)
+            super().__init__(product_id, name, price, stock)
             self.__download_size = download_size
             
     def get_download_size(self):

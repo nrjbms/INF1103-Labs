@@ -1,12 +1,13 @@
 from product import Product
+from canbeshipped import CanBeShipped
 
 class PhysicalProduct(Product):
     
     SHIPPING = 5.00
     COST_PER_KG = 2.00
     
-    def __init__(self, product_id, name, price, stock,weight):
-        super().__init__(self, product_id, name, price, stock)
+    def __init__(self, product_id, name, price, stock, weight):
+        super().__init__(product_id, name, price, stock)
         self.__weight = weight
  
     def get_weight(self):
