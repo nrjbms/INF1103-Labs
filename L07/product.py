@@ -40,5 +40,5 @@ class Product(ABC):
         }
         
 @abstractmethod
-def get_fulfillment_info(self):
+def get_fulfilment_info(self):
     pass
