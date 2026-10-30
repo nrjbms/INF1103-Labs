@@ -35,7 +35,7 @@ def save_inventory(inventory):
 
 def add_product_menu(inventory):
     while True:
-        name = input("Enter product name: ").strip()
+        name = input("Product Name: ").strip()
         if name == "":
             print("Name cannot be empty.")
         else:
@@ -43,7 +43,7 @@ def add_product_menu(inventory):
 
     while True:
         try:
-            price = float(input("Enter price: "))
+            price = float(input("Price: "))
             if price < 0:
                 print("Price cannot be negative.")
             else:
@@ -53,7 +53,7 @@ def add_product_menu(inventory):
 
     while True:
         try:
-            stock = int(input("Enter stock quantity: "))
+            stock = int(input("Stock Quantity: "))
             if stock < 0:
                 print("Stock cannot be negative.")
             else:
@@ -97,6 +97,8 @@ def search_product_menu(inventory):
 def main():
     inventory = Inventory()
     load_inventory(inventory)
+    
+    title_display()
 
     while True:
         print("\n----------- MENU -----------")

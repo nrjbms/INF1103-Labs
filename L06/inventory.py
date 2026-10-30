@@ -1,14 +1,28 @@
+from product import Product
+
+
 class Inventory:
 
     def __init__(self):
         self.__products = []
 
-    def add_product(self, product):
-        if self.search_product(product.get_product_id()) is not None:
+    def __generate_id(self):
+        highest = 0
+        for product in self.__products:
+            number = product.get_product_id()[1:]
+            if number.isdigit() and int(number) > highest:
+                highest = int(number)
+        return f"P{highest + 1:03d}"
+
+    def add_product(self, name, price, stock, product_id=None):
+        if product_id is None:
+            product_id = self.__generate_id()
+        elif self.search_product(product_id) is not None:
             print("Error: a product with that ID already exists.")
-            return False
+            return None
+        product = Product(product_id, name, price, stock)
         self.__products.append(product)
-        return True
+        return product
 
     def search_product(self, search_term):
         search_term = search_term.lower()
