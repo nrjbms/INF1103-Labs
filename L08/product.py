@@ -8,7 +8,7 @@ class Product(ABC):
         self.__name = name
         self.__price = price
         self.__stock = stock
-        self.__supplier = supplier
+        self.__supplier: Supplier = supplier
 
     def get_product_id(self):
         return self.__product_id
@@ -41,7 +41,7 @@ class Product(ABC):
             "name": self.__name,
             "price": self.__price,
             "stock": self.__stock,
-            "supplier-id": self.__supplier.get_supplier_id()
+            "supplier_id": self.__supplier.get_supplier_id()
         }
         
 @abstractmethod

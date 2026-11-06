@@ -24,8 +24,7 @@ def find_supplier(suppliers: list[Supplier], supplier_id: str):
 
 
 def create_product_from_dict(item: dict, suppliers: list[Supplier]):
-    """Use the saved 'type' to build the right subclass, and the saved
-    'supplier_id' to re-link the product to its existing Supplier object."""
+
     supplier = find_supplier(suppliers, item["supplier_id"])
     if supplier is None:
         raise ValueError(f"Unknown supplier: {item['supplier_id']}")
