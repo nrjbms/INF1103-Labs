@@ -17,23 +17,27 @@ def title_display():
 
 # ---------- File handling ----------
 def find_supplier(suppliers: list[Supplier], supplier_id: str):
+    
     for supplier in suppliers:
+        
         if supplier.get_supplier_id().lower() == supplier_id.lower():
             return supplier
+        
     return None
 
 
 def create_product_from_dict(item: dict, suppliers: list[Supplier]):
 
     supplier = find_supplier(suppliers, item["supplier_id"])
+    
     if supplier is None:
         raise ValueError(f"Unknown supplier: {item['supplier_id']}")
     if item["type"] == "physical":
-        return PhysicalProduct(item["product_id"], item["name"], item["price"],
-                               item["stock"], supplier, item["weight"])
+        return PhysicalProduct(item["product_id"], item["name"], item["price"],item["stock"], supplier, item["weight"])
+    
     if item["type"] == "digital":
-        return DigitalProduct(item["product_id"], item["name"], item["price"],
-                              item["stock"], supplier, item["download_size"])
+        return DigitalProduct(item["product_id"], item["name"], item["price"],item["stock"], supplier, item["download_size"])
+    
     raise ValueError(f"Unknown product type: {item['type']}")
 
 
@@ -73,7 +77,7 @@ def save_data(inventory: Inventory, suppliers: list[Supplier]):
 
 def add_supplier_menu(suppliers: list[Supplier]):
     while True:
-        name = input("Supplier Name: ").strip()
+        name = input("\nSupplier Name: ").strip()
         if name == "":
             print("Name cannot be empty.")
         else:
@@ -101,7 +105,8 @@ def display_suppliers_menu(suppliers: list[Supplier]):
     if len(suppliers) == 0:
         print("No suppliers yet.")
         return
-    print("\n--- Suppliers ---")
+    print("\nSuppliers")
+    print("-" * 30)
     for supplier in suppliers:
         supplier.display_information()
 
@@ -112,17 +117,18 @@ def add_product_menu(inventory: Inventory, suppliers: list[Supplier]):
         print("Add a supplier first (menu option 6).")
         return
 
-    while True:
-        print("Product type:")
-        print("  1. Physical product")
-        print("  2. Digital product")
-        type_choice = input("Choose type (1-2): ").strip()
-        if type_choice in ("1", "2"):
-            break
+    print("\nProduct type:")
+    print("  1. Physical product")
+    print("  2. Digital product")
+    type_choice = input("Choose type (1-2): ").strip()
+    
+    if type_choice in ("1", "2"):
+        pass
+    else:
         print("Please enter 1 or 2.")
 
     while True:
-        name = input("Product name: ").strip()
+        name = input("\nProduct name: ").strip()
         if name == "":
             print("Name cannot be empty.")
         else:
@@ -130,17 +136,17 @@ def add_product_menu(inventory: Inventory, suppliers: list[Supplier]):
 
     while True:
         try:
-            price = float(input("Enter price: "))
+            price = float(input("\nEnter Price: $"))
             if price < 0:
                 print("Price cannot be negative.")
             else:
                 break
         except ValueError:
-            print("Please enter a valid number.")
+            print("Please enter a valid Number.")
 
     while True:
         try:
-            stock = int(input("Stock quantity: "))
+            stock = int(input("\nStock Quantity: "))
             if stock < 0:
                 print("Stock cannot be negative.")
             else:
@@ -150,7 +156,7 @@ def add_product_menu(inventory: Inventory, suppliers: list[Supplier]):
 
     display_suppliers_menu(suppliers)
     while True:
-        supplier = find_supplier(suppliers, input("Enter supplier ID: ").strip())
+        supplier = find_supplier(suppliers, input("\nEnter Supplier ID: ").strip())
         if supplier is None:
             print("Supplier not found. Please enter an ID from the list.")
         else:
@@ -161,7 +167,7 @@ def add_product_menu(inventory: Inventory, suppliers: list[Supplier]):
     if type_choice == "1":
         while True:
             try:
-                weight = float(input("Enter weight (kg): "))
+                weight = float(input("\nEnter weight (kg): "))
                 if weight < 0:
                     print("Weight cannot be negative.")
                 else:
@@ -172,7 +178,7 @@ def add_product_menu(inventory: Inventory, suppliers: list[Supplier]):
     else:
         while True:
             try:
-                download_size = float(input("Enter download size (MB): "))
+                download_size = float(input("\nEnter download size (MB): "))
                 if download_size < 0:
                     print("Download size cannot be negative.")
                 else:
@@ -194,7 +200,7 @@ def update_stock_menu(inventory: Inventory):
 
     while True:
         try:
-            quantity = int(input("Enter quantity to add (negative to remove): "))
+            quantity = int(input("\nEnter quantity to add (negative to remove): "))
             break
         except ValueError:
             print("Please enter a whole number.")
@@ -211,7 +217,7 @@ def search_product_menu(inventory: Inventory):
         print("Product not found.")
     else:
         product.display_information()
-        print(f"    Fulfilment: {product.get_fulfilment_info()}")
+        print(f"Fulfilment: {product.get_fulfilment_info()}")
 
 
 def remove_product_menu(inventory: Inventory):
@@ -223,16 +229,17 @@ def remove_product_menu(inventory: Inventory):
         print(f"Removed {removed.get_name()} from the inventory.")
 
 
-# ---------- Order menu ----------
 def create_order_menu(inventory: Inventory, orders: list[Order]):
     if len(inventory.get_products()) == 0:
         print("Inventory is empty. Add products before creating an order.")
         return
 
     order = Order(f"O{len(orders) + 1:03d}")
-    print("Add products to the order (leave blank to finish).")
+    print("\nCreate Order")
+    inventory.display_all()
+    print("\nEnter a product ID or name to add it to the current order (or press 'Enter' to exit)")
     while True:
-        term = input("Product ID or name: ").strip()
+        term = input("\nProduct ID or name: ").strip()
         if term == "":
             break
         product = inventory.search_product(term)
@@ -252,7 +259,8 @@ def create_order_menu(inventory: Inventory, orders: list[Order]):
             except ValueError:
                 print("Please enter a whole number.")
         order.add_order_line(product, quantity)
-        print("Line added.")
+        print("Line added. Current order:")
+        order.display_information()
 
     if len(order.get_order_lines()) == 0:
         print("Order cancelled (no lines).")
@@ -260,6 +268,17 @@ def create_order_menu(inventory: Inventory, orders: list[Order]):
     orders.append(order)
     order.display_information()
 
+
+
+def display_orders_menu(orders: list[Order]):
+    if not orders:
+        print("No orders have been created yet.")
+        return
+    print("\nOrders")
+    print("-" * 30)
+    for order in orders:
+        order.display_information()
+        print("-" * 30)
 
 
 def main():
@@ -279,10 +298,11 @@ def main():
         print("6. Add a supplier")
         print("7. Display suppliers")
         print("8. Create an order")
-        print("9. Save data")
-        print("10. Exit")
+        print("9. Display orders")
+        print("10. Save data")
+        print("11. Exit")
         print("----------------------------")
-        choice = input("\nEnter Option (1-10): ").strip()
+        choice = input("\nEnter Option (1-11): ").strip()
 
         if choice == "1":
             inventory.display_all()
@@ -301,12 +321,14 @@ def main():
         elif choice == "8":
             create_order_menu(inventory, orders)
         elif choice == "9":
-            save_data(inventory, suppliers)
+            display_orders_menu(orders)
         elif choice == "10":
+            save_data(inventory, suppliers)
+        elif choice == "11":
             print("Goodbye!")
             break
         else:
-            print("Invalid choice. Please enter 1-10.")
+            print("Invalid choice. Please enter 1-11.")
 
 
 main()

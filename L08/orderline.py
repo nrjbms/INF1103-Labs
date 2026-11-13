@@ -17,4 +17,4 @@ class OrderLine:
     
     def display_information(self):
         self.__product.display_information()
-        print(f" Quantity: {self.__quantity} | Line Total: ${self.calculate_line_total():.2f}")
+        print(f"Quantity: {self.__quantity} | Line Total: ${self.calculate_line_total():.2f}")
