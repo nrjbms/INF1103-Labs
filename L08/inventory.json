@@ -16,7 +16,7 @@
             "product_id": "P001",
             "name": "Anvil",
             "price": 500.0,
-            "stock": 1,
+            "stock": 100,
             "supplier_id": "S001",
             "type": "physical",
             "weight": 500.0
@@ -29,6 +29,33 @@
             "supplier_id": "S002",
             "type": "digital",
             "download_size": 5000.0
+        },
+        {
+            "product_id": "D001",
+            "name": "Photo Editor",
+            "price": 49.9,
+            "stock": 100,
+            "supplier_id": "S002",
+            "type": "digital",
+            "download_size": 0.0
+        },
+        {
+            "product_id": "P003",
+            "name": "Monitor Stand",
+            "price": 39.5,
+            "stock": 7,
+            "supplier_id": "S002",
+            "type": "physical",
+            "weight": 0.0
+        },
+        {
+            "product_id": "P004",
+            "name": "Dynamite",
+            "price": 100.0,
+            "stock": 500,
+            "supplier_id": "S001",
+            "type": "physical",
+            "weight": 5.0
         }
     ]
 }
